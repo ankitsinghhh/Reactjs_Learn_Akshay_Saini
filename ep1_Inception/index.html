@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Course Intro</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+
+    <h1>hello top of root</h1>
+
+    <div id="root">
+        <!-- <h1>Hello world</h1>
+        <h1>Hello world</h1>
+        <h1>Hello world</h1>
+        <h1>Hello world</h1>
+        <h1>Hello world</h1>
+        <h1>Hello world</h1>
+        <h1>Hello world</h1>
+        <h1>Hello world</h1>
+        <h1>Hello world</h1>
+        <h1>Hello world</h1>
+        <h1>Hello world</h1>
+        <h1>Hello world</h1>
+        <h1>Hello world</h1>
+        <h1>Hello world</h1>
+        <h1>Hello world</h1>
+        <h1>Hello world</h1> --> 
+        <!-- root.render replace the existing code within the root with the element in its argument -->
+    </div>
+
+    <h1>Hello bottom of root</h1>
+
+    <!-- React is a library -- why ? -> becoz it has capabiltiy to work only on small portion of your code , that is you can write code in html css js and can use reactjs for a single or more of elements on that page -->
+
+    <!-- React is just a javascript code -->
+     <!-- React framework  can work on the existing app also , as it can work on small portion of your app , while other frameworks require you to build the whole app using them-->
+
+    <!-- <script>
+        // createing hello world para with javascript
+      const heading =  document.createElement("h1")
+       heading.innerHTML = "Hello world from javascript" 
+
+       const root = document.querySelector('#root')
+       root.appendChild(heading)
+
+    </script> -->
+
+    <!-- injectiing react using CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script> 
+    <!-- above one is core of react , it is main file -->
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- this one above is react library repsonsible dom operations, needed to modify the dom, this file is like a bridge between the browser and react -->
+
+    <script>
+        //createing hello world para with ReactJS
+        // const heading = React.createElement("h1",{},"Hello wolrd from React!") 
+
+        // const root = ReactDOM.createRoot(document.getElementById("root"));
+        
+        // root.render(heading)     
+
+    </script>
+
+    <script src="app.js"></script>
+
+
+</body>
+
+</html>
