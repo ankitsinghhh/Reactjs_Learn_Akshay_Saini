@@ -1,65 +1,88 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import  ReactDOM from 'react-dom/client'
 
-const heading = React.createElement(
-    "h1",
-    {id:"heading",xyz:"abc"}, //use to give attributes
-    "Hello wolrd from React!"
+//React Element - they are equivalent to DOM elements
+const heading = React.createElement("h1",
+    {id:"heading"},
+    "Namaste React 🚀"
 ) 
+    // react.createElement ==> is an object --> when reendered to dom becomes html element
+console.log(heading)
 
-console.log(heading) // it is an object
+//above way of writing html code in javascript file is bit clumsy and headache to write like a full fucntional website in this order , hence JSX file was cread by facebook developers
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-
-// root.render(heading)  
-
-
-/*
-How to create nested elements in React
-
-<div id="parent">
-    <div id="child">
-        <h1></h1>
-    </div>
-</div>
+//JSX -> it is not html in javascript but it is html-like or xml-like syntax 
+const jsxHeading = <h1 id='heading' className='heading'>Namaste React using jsx 🚀</h1> // creating react element ussing jsx 
 
 
-ReactEelement(object) => html(browser understands)
+
+//jsx is not valid javascript( not understandable by js egine ) - then how it runs -- cause of parcel's babel
+//jsx code is transpiled (converted to code browser/react can understand) by parcel ( by babel )
+// behind the scenes - babel converts the jsx code to react.createElement which is converted to html element
+
+//in jsx - we cannot use  class but instead we use className
+// in jsx- to write it in multiple lines , we need to use parantheses - ()
+/* const jsxHeading = ( <h1 id='heading' className='heading'>
+    Namaste React using jsx 🚀
+    </h1>
+     )// creating react element ussing jsx ( writing in multiple lines )
+ */
+
+console.log(jsxHeading)
 
 
-*/
+//REACT-COMPONENTS
+/**
+ * * TWO TYPES: 
+ *  1.Class-based components ( old way )
+ *  2.Function Components ( new way ) - a function that returns a jsx code
+ */
+
+// React Function Components
+const HeadingComponent = () =>{
+    return <h1>Namaste React using Functional Component 🚀</h1>
+}
+
+//  const HeadingComponent2 = ()=> ( 
+//     <h1 class="heading">heading</h1>
+// ) ; // ? short to write above functional component
+
+// const HeadingComponent = () =><h1>Namaste React using Functional Component 🚀</h1> // ? also shortcut to write above functional component
+
+const text = <span>This is a text </span>
+
+const Title = () =>{
+    return (<h1>
+        {text}
+         This is Main-Title component 👩‍💻</h1>)
+}
+
+const number = 100;
+
+//Component Composition -> Component inside component
+const Container = () =>{
+    return (
+        <div id="container">
+            <Title/>
+            <Title></Title> 
+            {Title()}
+            // * above three ways are same only
+            <HeadingComponent/>
+            <p>This is paragraph inside container </p>
+       
+        
+        </div>
+    )
+}
 
 
-const parent = React.createElement(
-    "div",
-    {id:"parent"},
-    [
-        React.createElement(
-            "div",
-            {id:"child1"},
-            // React.createElement("h1", {id:"heading"}, "I am a h1 tag") // in case we only want to create a single child 
-            //OR
-            [
-                React.createElement("h1",{},"This is Namaste React course 🚀"),
-                React.createElement("h2",{},"by Akshay Saini")
-            ] // in case we want to create many childrens , then we need to give array of children
-        ),
-        React.createElement(
-            "div",
-            {id:"child1"},
-            // React.createElement("h1", {id:"heading"}, "I am a h1 tag") // in case we only want to create a single child 
-            //OR
-            [
-                React.createElement("h1",{},"I'm a h1 tag"),
-                React.createElement("h2",{},"I'm a h2 tag")
-            ] // in case we want to create many childrens , then we need to give array of children
-        )
-    ]
-)
-// above way is complicated and not tidy , hence makes more complex , hence the solution is jsx 
+const root = ReactDOM.createRoot(document.getElementById("root"))
 
-console.log(parent) // it is an object
 
-root.render(parent)
 
-console.log("this will render the child")
+
+// root.render(jsxHeading) // render the heading element to the root element with id "root" in the DOM ->replaces the content of root with heading
+
+// root.render(<HeadingComponent/>) // render the heading component , a heading component is written like this in render function , this is converted by babel to HeadingComponent()
+
+root.render(<Container/>) // render the container component , a container component is written like this in render function , this is converted by babel to Container()

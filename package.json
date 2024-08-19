@@ -4,6 +4,10 @@
   "description": "this is reacjts learning project from akshay saini",
 
   "scripts": {
+    "start":"parcel index.html",
+    "build": "parcel build index.html",
+
+    "precommit": "lint-staged",
     "test": "jest"
   },
   "author": "",
@@ -17,6 +21,6 @@
     "react-dom": "^18.3.1"
   },
   "browserslist": [
-    "last 2 versions",
+    "last 2 versions"
   ]
 }
