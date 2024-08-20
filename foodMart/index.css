@@ -70,7 +70,7 @@ body {
 
 .container{
     
-    padding-top: 100px;
+    padding-top: 80px;
     max-width:1300px;
     margin: 0 auto;
 }
@@ -104,8 +104,45 @@ body {
    
 }
 
-.search{
-    padding:10px;
+.filter{
+    padding:10px   ;
+    display: flex;
+    gap:15px;
+    align-items: center;
+    flex-wrap:wrap
+}
+
+.filter-btn{
+    padding:8px 10px;
+  
+    color:white;
+    border:none;
+    cursor:pointer;
+    border-radius:5px;
+}
+
+.clear-btn{
+    background-color: #C58AF9;
+
+}
+.clear-btn:hover{
+    background-color: #b160f7;
+}
+
+.top-btn{
+    background-color:coral;
+}
+
+.top-btn:hover{
+    background-color: rgb(255, 109, 55);
+}
+
+.low-btn{
+    background-color: red;
+}
+
+.low-btn:hover{
+    background-color: crimson;
 }
 
 .res-card{
@@ -117,6 +154,7 @@ body {
     height:200px;
     object-fit: cover;
     border-radius:10px;
+  
 }
 
 .grey{
