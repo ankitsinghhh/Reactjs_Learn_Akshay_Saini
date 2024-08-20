@@ -66,7 +66,7 @@ const Container = () =>{
             <Title/>
             <Title></Title> 
             {Title()}
-            // * above three ways are same only
+            {/* // * above three ways are same only */}
             <HeadingComponent/>
             <p>This is paragraph inside container </p>
        
