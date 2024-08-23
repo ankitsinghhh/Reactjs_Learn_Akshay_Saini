@@ -1,9 +1,11 @@
 
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import Data from '../utils/mockData.js' // default export
+import restaurantList from '../utils/mockDataswiggy.js'
 import RestroCard from './Restrocard.js'
+import Shimmer from './Shimmer.js'
 
-const Body = () => {
+const Body = () => { 
 
 
     // * local state variable - superpowerful variable -- > whenever a state variable changes , react re-renders the component -- as soon as variable (data ) changes , Ui changes 
@@ -18,7 +20,10 @@ const Body = () => {
     // restaurantData = [{abc: 'abc'}, {abc: 'abc'}] //? to modify
 
     const [totalData, setTotalData] = useState(Data.resData.length)
-    const [restaurantData,setRestaurantData] = useState(Data.resData)
+    const [restaurantData,setRestaurantData] = useState([])
+    const [originalResData, setoriginalResData] = useState([])
+    // const [restaurantData,setRestaurantData] = useState(restaurantList)  // i will uncomment it if swiggy api fails
+    // const [originalResData, setoriginalResData] = useState(restaurantList) // i will uncomment it if swiggy api fails
    
 
     // ? figuring out logic to filter the data 
@@ -30,30 +35,114 @@ const Body = () => {
 
     const filterHandler = (type) =>{
         
-        setRestaurantData(Data.resData)
-        console.log(type)
+        console.log(restaurantData,"filter me h")
 
         if(type === "TopRestaurants"){
-            const topfilteredData = Data.resData.filter(res =>res.rating.split(' ')[0]>=4)
+            setRestaurantData(originalResData)
+
+            // const topfilteredData = Data.resData.filter(res =>res.rating.split(' ')[0]>=4) for mockData.json
+            const topfilteredData = originalResData?.filter( res => res.info.avgRating > 4.3)
             console.log(topfilteredData)
             setRestaurantData(topfilteredData)
             setTotalData(topfilteredData.length)
+            // console.log("inside top")
         }else if (type === "LowRestaurants"){
-            const lowfilteredData = Data.resData.filter(res =>res.rating.split(' ')[0]<4)
+            setRestaurantData(originalResData)
+
+            // const lowfilteredData = Data.resData.filter(res =>res.rating.split(' ')[0]<4) // for mockData.json
+            const lowfilteredData = originalResData?.filter( res => res.info.avgRating <= 4.3) // for mockData.json
+            console.log("inside low")
+
             console.log(lowfilteredData)
             setRestaurantData(lowfilteredData)
             setTotalData(lowfilteredData.length)
-        }
+            console.log("inside low")
+            }
     }
 
     const clearFilterHandler = () =>{
-        setRestaurantData(Data.resData)
-        setTotalData(Data.resData.length)
+        setRestaurantData(originalResData)
+        setTotalData(originalResData.length)
         console.log("Filter cleared")
     }
 
 
-    return (
+    // ? UseEffect Hook - // * accepts two arguments
+//   useEffect( callback function , array) // the callback function will be called after the render the body component is rendered
+    //   useEffect(() => {
+    //     // cleanup function
+    //     return () => {
+    //       // cleanup code
+    //     }
+    //   }, [dependency]) // dependency array - if any of the dependency changes, useEffect hook will run again
+
+
+    useEffect( () => {
+        console.log("useEffect called")
+        fetchData()
+        setTotalData(restaurantData.length)
+    },[])
+
+    const fetchData = async () => {
+        try {
+            // Fetch data from the API
+            const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.406498&lng=78.47724389999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+            const response = await data.json();
+            
+            // Log the full response to understand the structure
+            console.log(response);
+    
+            // Check if the data structure exists before accessing it
+            const restaurantDatalist = response?.data?.cards?.[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+            console.log(restaurantDatalist);
+            if (restaurantDatalist) {
+                console.log(restaurantDatalist[1].info);
+                console.log(restaurantDatalist[1].info.name);
+                console.log(restaurantDatalist[1].info.avgRating);
+                console.log(restaurantDatalist[1].info.cuisines.join(","));
+                console.log(restaurantDatalist[1].info.sla.slaString);
+                console.log(restaurantDatalist[1].info.cloudinaryImageId);
+    
+                setRestaurantData(restaurantDatalist);
+                setoriginalResData(restaurantDatalist)
+                setTotalData(restaurantDatalist.length);
+                console.log("fetchData ends here");
+    
+                // restaurantDatalist.forEach((res) => {
+                //     console.log(res.info);
+                // });
+
+                const newData = restaurantDatalist.filter( (res) => res.info.avgRating > 4.3)
+                console.log(newData,restaurantDatalist.length)
+
+            } else {
+                console.log("Data structure not found in the response");
+            }
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
+    }
+    
+// ? conditional rendering
+// if(restaurantData.length === 0) { 
+//     return (
+//         <div>
+//             <Shimmer/>
+//         </div>
+//     )
+// }
+   
+
+    
+
+
+    return restaurantData.length === 0 ? 
+    (
+        <div>
+            <Shimmer/>
+        </div>
+    ) 
+    : (
         <div className="body">
             <div className='container'>
                 <div className='filter'>
@@ -127,12 +216,13 @@ const Body = () => {
                           restaurantData?.map(res => {
                             return (
                                 <RestroCard 
-                                key={res.id} 
-                                resName={res.resName} 
-                                cuisine={res.cuisine} 
-                                imgLink={res.imgLink}
-                                rating={res.rating}
-                                time={res.time} 
+                                key={res?.info?.id} 
+                                resName={res?.info?.name} 
+                                cuisine={res?.info?.cuisines.join(',')}  
+                                imgLink={res?.info?.cloudinaryImageId}
+                                rating={res?.info?.avgRating}
+                                time={res?.info?.sla.slaString} 
+                                opened={res?.info?.availability?.opened}
                                 />
                             )
                         })

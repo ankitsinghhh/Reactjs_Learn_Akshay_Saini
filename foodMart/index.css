@@ -68,6 +68,23 @@ body {
     cursor: pointer;
 }
 
+.login-btn{
+    background-color: blue;
+    color:white;
+    padding:5px 10px;
+    border:none;
+    border-radius:6px;
+    cursor: pointer;
+}
+.logout-btn{
+    background-color: red;
+    color:white;
+    padding:5px 10px;
+    border:none;
+    border-radius:6px;
+    cursor: pointer;
+}
+
 .container{
     
     padding-top: 80px;
@@ -80,18 +97,24 @@ body {
     flex-wrap:wrap;
     gap:10px;
     justify-content: space-between;
+    padding-bottom:40px;
+    
 
 }
 
 .res-card{
     color:var(--text-color);
     width:310px;
-    
+    min-height:360px;
     background-color: var(--card-color);
     border-radius:10px;
  
 
     transition:all 0.3s;
+
+ 
+    border-radius: 4px;
+    overflow: hidden;
     
     
 }
@@ -154,7 +177,41 @@ body {
     height:200px;
     object-fit: cover;
     border-radius:10px;
+/* 
+ background-color:  #f0f0f0;;
+    animation: shimmer 1.5s infinite; */
   
+}
+
+.res-text,.res-img{
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+
+.shimmer-title {
+    width: 60%;
+    height: 20px;
+    margin: 10px 0;
+}
+
+.shimmer-cuisine,
+.shimmer-rating,
+.shimmer-time,
+.shimmer-status {
+    width: 40%;
+    height: 15px;
+    margin: 5px 0;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
 }
 
 .grey{
@@ -187,6 +244,12 @@ body {
 @media(max-width:440px){
     .about,.contact{
         display: none;
+    }
+
+    .nav-items{
+        ul{
+            gap:5px;
+        }
     }
     
 }
