@@ -17,18 +17,26 @@ const Shimmer = () => {
     return (
         <div className="body">
             <div className='container'>
-                <div className='filter'>
-                    <button className='filter-btn top-btn' onClick={() => filterHandler("TopRestaurants")}>
-                        Top Rated Restaurants
-                    </button>
-                    <button className='filter-btn low-btn' onClick={() => filterHandler("LowRestaurants")}>
-                        Low Rated Restaurants
-                    </button>
-                    <button className='filter-btn clear-btn' onClick={() => clearFilterHandler()}>
-                        ClearFilter
-                    </button>
-                    <p>Total Data: 0 </p>
-                </div>
+             
+            <div className='filter-and-search'>
+                        <div className='filter'>
+                            <button className='filter-btn top-btn' onClick={() => filterHandler("TopRestaurants")}>
+                                Top Rated Restaurants
+                            </button>
+                            <button className='filter-btn low-btn' onClick={() => filterHandler("LowRestaurants")}>
+                                Low Rated Restaurants
+                            </button>
+                            <button className='filter-btn clear-btn' onClick={() => clearFilterHandler()}>
+                                ClearFilter
+                            </button>
+                            <p>Total Data: 0 </p>
+                        </div>
+
+                        <div className='search'>
+                            <input type='text' placeholder='Search for restaurants...' />
+                            <button className='search-btn'>Search</button> 
+                        </div>
+                    </div>
                 <div className='res-cards-container'>
                     {shimmerCards}
                 </div>
