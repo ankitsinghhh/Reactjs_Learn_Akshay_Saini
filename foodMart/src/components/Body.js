@@ -3,6 +3,7 @@ import Data from '../utils/mockData.js' // default export
 import restaurantList from '../utils/mockDataswiggy.js'
 import RestroCard from './Restrocard.js'
 import Shimmer from './Shimmer.js'
+import { Link } from 'react-router-dom'
 
 const Body = () => {
 
@@ -220,8 +221,12 @@ const Body = () => {
                         {/* // Use map() to iterate over restaurantData array */}
                         {restaurantData.length > 0 ? (
                             restaurantData.map((res) => (
-                                <RestroCard
-                                    key={res?.info?.id}
+                                <Link  
+                                to={"/restaurants/"+res?.info?.id}
+                                key={res?.info?.id}
+                                >
+                                    <RestroCard
+                                
                                     resName={res?.info?.name}
                                     cuisine={res?.info?.cuisines.join(",")}
                                     imgLink={res?.info?.cloudinaryImageId}
@@ -229,6 +234,7 @@ const Body = () => {
                                     time={res?.info?.sla.slaString}
                                     opened={res?.info?.availability?.opened}
                                 />
+                                </Link>
                             ))
                         ) : (
                             <p>No Restaurants Found</p>

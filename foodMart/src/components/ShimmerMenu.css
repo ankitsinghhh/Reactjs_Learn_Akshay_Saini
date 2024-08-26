@@ -1,0 +1,71 @@
+/* Shimmer Effect */
+@keyframes shimmerAnimation {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.loading-effect {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0) 75%);
+    background-size: 2000px 100%;
+    animation: shimmerAnimation 2s infinite;
+}
+
+/* Apply shimmer effect to specific elements */
+.restaurant-title.loading-effect {
+    width: 60%;
+    height: 50px;
+}
+
+.res-cuisine.loading-effect {
+    width: 40%;
+    height: 32px;
+    margin-top: 7px;
+}
+
+.item-card.loading-effect {
+    height: 176px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.left-part-itemcard.loading-effect {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.right-part-itemcard.loading-effect {
+    width: 150px;
+    height: 150px;
+}
+
+.food-title.loading-effect,
+.food-rating.loading-effect,
+.food-desc.loading-effect,
+.food-price.loading-effect {
+    height: 15px;
+    margin-bottom: 10px;
+}
+
+.food-title.loading-effect {
+    width: 50%;
+}
+
+.food-rating.loading-effect {
+    width: 30%;
+}
+
+.food-desc.loading-effect {
+    width: 80%;
+}
+
+.food-price.loading-effect {
+    width: 40%;
+}
