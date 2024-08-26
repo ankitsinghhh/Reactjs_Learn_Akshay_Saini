@@ -246,6 +246,10 @@ body {
     margin: 5px 0;
 }
 
+.item-card{
+    
+}
+
 @keyframes shimmer {
     0% {
         background-position: -200% 0;
