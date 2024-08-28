@@ -68,19 +68,30 @@ const RestaurantMenu = () => {
 
 
                                         </span>  </h4>
-                                        <p className='food-rating'>
-                                            <IoIosStar color="coral" /> {itemCard.card.info.ratings.aggregatedRating.rating},
-                                            <span> {itemCard.card.info.ratings.aggregatedRating.ratingCount}</span>
-                                        </p>
+
+                                       
+
+                                        {
+                                             itemCard.card.info.ratings.aggregatedRating.rating && 
+
+                                             <p className='food-rating'>
+                                             <IoIosStar color="coral" /> {itemCard.card.info.ratings.aggregatedRating.rating},
+                                             <span> {itemCard.card.info.ratings.aggregatedRating.ratingCount}</span>
+                                         </p>
+
+                                        }
 
                                         <p className='food-desc'>
                                             {itemCard.card.info.description}
                                         </p>
-                                        <p className='food-price'>₹ {itemCard.card.info.price / 100} </p>
+                                        <p className='food-price'>₹ {itemCard.card.info.price/100 || itemCard.card.info.defaultPrice/100 } </p>
 
                                     </div>
                                     <div className='right-part-itemcard' >
-                                        <img className='food-img' src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/${itemCard.card.info.imageId}`} />
+                                        {
+                                            itemCard.card.info.imageId && 
+                                            <img className='food-img' src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/${itemCard.card.info.imageId}`} />
+                                        }
                                     </div>
                                 </li>
                             )

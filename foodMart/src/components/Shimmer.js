@@ -1,7 +1,7 @@
 const Shimmer = () => {
     const shimmerCards = [];
 
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 16; i++) {
         shimmerCards.push(
             <div key={i} className='res-card shimmer-card'>
                 <div className='res-img'></div>

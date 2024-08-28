@@ -23,7 +23,7 @@ a{
 }
 
 .nav-items ul li a {
-   color:white;
+   color:var(--text-color);
 }
 .nav-items ul li:hover {
     background-color: rgba(128, 128, 128, 0.301);
@@ -99,7 +99,7 @@ body {
 
 .container{
     
-    padding-top: 80px;
+    padding: 80px 15px 10px 15px;
     max-width:1300px;
     margin: 0 auto;
 }
